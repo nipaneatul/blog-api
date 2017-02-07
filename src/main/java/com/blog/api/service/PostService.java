@@ -28,7 +28,12 @@ public class PostService {
 	public void init() {
 		posts = new ArrayList<>();
 	}
-	
+	/**
+	 * 
+	 * @param params 
+	 * @return - Returns the List of Post for the specific user
+	 * @author atuln
+	 */
 	public List<Post> search(Map<String, String> params) {
 		String username = params.get("username");
 		List<Post> result;
@@ -40,6 +45,12 @@ public class PostService {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param username
+	 * @return - Returns the List of Post for the mentioned user
+	 * @author atuln
+	 */
 	public List<Post> getUserPosts(String username) {
 		List<Post> userPosts = posts.stream()
 				.filter(p -> p.getUsername().equals(username))
@@ -47,6 +58,12 @@ public class PostService {
 		return userPosts;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return - Get the post depending upon its id.
+	 * @author atuln
+	 */
 	public Post getPost(Long id) {
 		Post post = posts.stream()
 				.filter(p -> p.getId().equals(id))
@@ -54,6 +71,13 @@ public class PostService {
 		return post;
 	}
 	
+	
+	/**
+	 * 
+	 * @param newPost
+	 * @return - Add a new post
+	 * @author atuln
+	 */
 	public Post add(Post newPost) {
 		Long postId = idGenerator.generate();
 		List<Comment> comments = newPost.getComments();
@@ -71,15 +95,38 @@ public class PostService {
 		return newPost;
 	}
 	
+	
+	/**
+	 * 
+	 * @param updatedPost
+	 * @return - Updates the post content value
+	 * @author atuln
+	 */
 	public Post update(Post updatedPost) {
 		Post post = getPost(updatedPost.getId());
 		post.setContent(updatedPost.getContent());
 		return post;
 	}
 	
+	
+	/**
+	 * 
+	 * @param id
+	 * Delete the depending upon the id.
+	 * @author atuln
+	 */
 	public void delete(Long id) {
 		Post post = getPost(id);
 		posts.remove(post);
 	}
+	
+	/**
+	 * Delete all the posts
+	 * @author atuln
+	 */
+	public void removeAll() {
+		init();
+	}
+	
 
 }

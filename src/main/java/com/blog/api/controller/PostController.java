@@ -23,30 +23,71 @@ public class PostController {
 	@Autowired
 	PostService postService;
 	
+	/**
+	 * 
+	 * @param params
+	 * @return - Gives all the posts into list
+	 * @author atuln
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Post> list(@RequestParam Map<String,String> params) {
 		List<Post> posts = postService.search(params);
 		return posts;
 	}
 	
+	
+	/**
+	 * 
+	 * @param post
+	 * @return - Gives the post saved in the system
+	 * @author atuln
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public Post save(@Validated @RequestBody Post post) {
 		return postService.add(post);
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return - Get post on the basis of id
+	 * @author atuln
+	 */
 	@RequestMapping(path="/{id}", method=RequestMethod.GET)
 	public Post get(@PathVariable Long id) {
 		Post post = postService.getPost(id);
 		return post;
 	}
 	
+	/**
+	 * 
+	 * @param post
+	 * @return - Gives updated post
+	 * @author atuln
+	 */
 	@RequestMapping(path="/{id}", method=RequestMethod.PUT) 
 	public Post update(@Validated @RequestBody Post post) {
 		return postService.update(post);
 	}
 	
+	/**
+	 * 
+	 * @param id 
+	 * delete the post on basis of id
+	 * @author atuln
+	 */
 	@RequestMapping(path="/{id}", method=RequestMethod.DELETE)
 	public void delete(@PathVariable Long id) {
 		postService.delete(id);
 	}
+	
+	/**
+	 * Delete all the posts from the system
+	 */
+	@RequestMapping(path="/removeall", method=RequestMethod.GET)
+	public void  removeAll() {
+		postService.removeAll();
+	}
+	
+	
 }

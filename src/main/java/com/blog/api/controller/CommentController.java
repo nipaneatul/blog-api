@@ -26,12 +26,24 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
+	/**
+	 * 
+	 * @param id
+	 * @return - List of all comment in a post
+	 * @author atuln
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Comment> list(@PathVariable Long id) {
 		Post post = postService.getPost(id);
 		return post.getComments();
 	}
 	
+	/**
+	 * 
+	 * @param comment
+	 * @return - Specific comment of a post
+	 * @author atuln
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public Comment save(@Validated @RequestBody Comment comment) {
 		commentService.addComment(comment);

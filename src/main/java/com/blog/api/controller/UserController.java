@@ -21,29 +21,69 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	/**
+	 * 
+	 * @return - Gives list of all users
+	 * @author atuln
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public List<User> list() {
 		return userService.search();
 	}
 	
+	
+	/**
+	 * 
+	 * @param id
+	 * @return - Gives user on basis of id
+	 * @author atuln
+	 */
 	@RequestMapping(path="/{id}", method=RequestMethod.GET)
 	public User show(@PathVariable Long id) {
 		return userService.getUser(id);
 	}
 	
+	
+	/**
+	 * 
+	 * @param updatedUser
+	 * @return - Gives updated user
+	 * @author atuln
+	 */
 	@RequestMapping(path="/{id}", method=RequestMethod.PUT)
 	public User update(@Validated @RequestBody User updatedUser) {
 		return userService.update(updatedUser);
 	}
 	
+	/**
+	 * 
+	 * @param newUser
+	 * @return - Gives user saved in system
+	 * @author atuln 
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public User save(@Validated @RequestBody User newUser) {
 		return userService.save(newUser);
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * Delete the user on id basis.
+	 * @author atuln
+	 */
 	@RequestMapping(path="/{id}", method=RequestMethod.DELETE)
 	public void delete(@PathVariable Long id) {
 		userService.delete(id);
+	}
+	
+	/**
+	 * Remove all the users from the system
+	 * @author atuln
+	 */
+	@RequestMapping(path="removeall", method=RequestMethod.GET)
+	public void removeall() {
+		userService.removeall();;
 	}
 
 }

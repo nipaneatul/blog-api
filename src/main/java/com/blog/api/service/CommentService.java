@@ -15,6 +15,13 @@ public class CommentService {
 	@Autowired
 	IdGenerator idGenerator;
 	
+	/**
+	 * 
+	 * @param comment
+	 * @return the added comment (Function takes comment as input and
+	 * add the comment to comment list
+	 *  @author atuln
+	 */
 	public Comment addComment(Comment comment) {
 		Long id = idGenerator.generate();
 		Post post = postService.getPost(comment.getPostId());

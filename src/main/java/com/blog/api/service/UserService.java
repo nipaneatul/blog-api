@@ -27,6 +27,12 @@ public class UserService {
 		return users;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return - Provides user depending upon id
+	 * @author atuln
+	 */
 	public User getUser(Long id) {
 		User user = users.stream()
 				.filter(p -> p.getId().equals(id))
@@ -34,6 +40,13 @@ public class UserService {
 		return user;
 	}
 	
+	
+	/**
+	 * 
+	 * @param newUser
+	 * @return - Save the newly created user.
+	 * @author atuln
+	 */
 	public User save(User newUser) {
 		User user = new User();
 		user.setId(idGenerator.generate());
@@ -44,6 +57,13 @@ public class UserService {
 		return user;
 	}
 	
+	/**
+	 * 
+	 * @param updatedUser
+	 * @return - Changing User attributes First name, Last name
+	 * and username
+	 * @author atuln
+	 */
 	public User update(User updatedUser) {
 		User user = getUser(updatedUser.getId());
 		user.setFirstName(updatedUser.getFirstName());
@@ -52,9 +72,24 @@ public class UserService {
 		return user;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * Delete the existing user by id
+	 * @author atuln
+	 */
 	public void delete(Long id) {
 		User user = getUser(id);
 		users.remove(user);
+	}
+	
+	
+	/**
+	 * Delete all the users
+	 * @author atuln
+	 */
+	public void removeall() {
+		init();
 	}
 	
 }
